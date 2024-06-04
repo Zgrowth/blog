@@ -1,0 +1,14 @@
+{
+  "name": "zgrowthBlog",
+  "version": "1.0.0",
+  "author": "zgrowth",
+  "scripts": {
+    "dev": "vuepress dev . --open --host \"localhost\"",
+    "build": "vuepress build ."
+  },
+  "devDependencies": {
+    "vuepress": "1.9.7",
+    "vuepress-theme-reco": "1.6.17"
+  },
+  "description": "zgrowth的blog"
+}
