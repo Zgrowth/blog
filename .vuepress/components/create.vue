@@ -23,6 +23,15 @@
       />
     </div>
     <div class="form-item">
+      <label for="title">Token：</label>
+      <input
+        v-model="token"
+        type="text"
+        placeholder="请输入"
+        class="input"
+      />
+    </div>
+    <div class="form-item">
       <label for="title">内容：</label>
       <v-md-editor
         v-model="content"
@@ -60,6 +69,7 @@ export default {
       categories: "",
       tags: "",
       clicked: false,
+      token: ""
     };
   },
   mounted() {
@@ -98,20 +108,6 @@ export default {
       // 使用 btoa 进行 Base64 编码
       return btoa(binaryString);
     },
-    base64ToString(base64Str) {
-      // 使用 atob 将 Base64 编码的字符串解码为二进制字符串
-      const binaryString = atob(base64Str);
-
-      // 将二进制字符串转换为 Uint8Array
-      const bytes = new Uint8Array(binaryString.length);
-      for (let i = 0; i < binaryString.length; i++) {
-        bytes[i] = binaryString.charCodeAt(i);
-      }
-
-      // 使用 TextDecoder 将 Uint8Array 转换为原始字符串
-      const decoder = new TextDecoder();
-      return decoder.decode(bytes);
-    },
     async saveBlog() {
       if (this.clicked) return;
       if (!this.title || !this.content) {
@@ -141,9 +137,7 @@ ${this.content}
           {
             method: "PUT",
             headers: {
-              Authorization: `token ${this.base64ToString(
-                "Z2hwXzhOdHFVcXVNMnhudmN2V2xETFdGNDNXQ2ZwN3FFRDJtVGRlYg=="
-              )}`,
+              Authorization: `token ${this.token || localStorage.getItem('createToken')}`,
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
@@ -155,6 +149,9 @@ ${this.content}
         );
 
         if (response.ok) {
+          if (this.token) {
+            localStorage.setItem("createToken", this.token);
+          }
           alert("保存成功，请耐心等待重新构建！");
         } else {
           alert("报错失败，出错了");
