@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "author": "zgrowth",
   "scripts": {
-    "dev": "vuepress dev . --open --host \"localhost\"",
-    "build": "vuepress build ."
+    "dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider vuepress dev . --open --host \"localhost\"",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider vuepress build ."
   },
   "devDependencies": {
     "vuepress": "1.9.7",
@@ -13,6 +13,7 @@
   "description": "zgrowth的blog",
   "dependencies": {
     "@kangc/v-md-editor": "^1.7.12",
+    "cross-env": "^7.0.3",
     "highlight.js": "^11.10.0"
   }
 }
