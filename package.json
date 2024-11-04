@@ -10,5 +10,9 @@
     "vuepress": "1.9.7",
     "vuepress-theme-reco": "1.6.17"
   },
-  "description": "zgrowth的blog"
+  "description": "zgrowth的blog",
+  "dependencies": {
+    "@kangc/v-md-editor": "^1.7.12",
+    "highlight.js": "^11.10.0"
+  }
 }
