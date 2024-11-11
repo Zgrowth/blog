@@ -23,15 +23,6 @@
       />
     </div>
     <div class="form-item">
-      <label for="title">Token：</label>
-      <input
-        v-model="token"
-        type="text"
-        placeholder="请输入"
-        class="input"
-      />
-    </div>
-    <div class="form-item">
       <label for="title">内容：</label>
       <v-md-editor
         v-model="content"
@@ -53,6 +44,7 @@ import "@kangc/v-md-editor/lib/style/base-editor.css";
 import githubTheme from "@kangc/v-md-editor/lib/theme/github.js";
 import "@kangc/v-md-editor/lib/theme/style/github.css";
 import hljs from "highlight.js";
+import githubToken from "../../utils";
 
 VMdEditor.use(githubTheme, {
   Hljs: hljs,
@@ -69,7 +61,6 @@ export default {
       categories: "",
       tags: "",
       clicked: false,
-      token: ""
     };
   },
   mounted() {
@@ -137,7 +128,7 @@ ${this.content}
           {
             method: "PUT",
             headers: {
-              Authorization: `token ${this.token || localStorage.getItem('createToken')}`,
+              Authorization: `token ${githubToken}`,
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
@@ -149,9 +140,6 @@ ${this.content}
         );
 
         if (response.ok) {
-          if (this.token) {
-            localStorage.setItem("createToken", this.token);
-          }
           alert("保存成功，请耐心等待重新构建！");
         } else {
           alert("报错失败，出错了");
@@ -193,7 +181,10 @@ ${this.content}
 .input {
   margin-right: 10px;
   padding: 8px 5px;
-  width: 300px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
 }
 
 button {

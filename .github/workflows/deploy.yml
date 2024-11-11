@@ -21,7 +21,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20.17.0
-      
+
+      - name: Set environment variables
+        run: |
+          echo "const token = '${{ secrets.REPO_TOKEN }}';export default token;" > utils/index.js
+
       - name: npm install
         run: npm install
 
