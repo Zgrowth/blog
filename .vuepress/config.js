@@ -80,7 +80,7 @@ module.exports = {
   "plugins": [
     ["autometa", autometa_options],
     [
-      "sitemap",
+      "vuepress-plugin-sitemap",
       {
         hostname: "https://zgrowth.github.io/blog/",
         // 排除无实际内容的页面
